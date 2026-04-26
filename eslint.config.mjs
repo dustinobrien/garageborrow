@@ -43,7 +43,12 @@ export default [
     },
   },
   {
-    files: ["apps/api/**/*.ts", "packages/shared/**/*.ts", "scripts/**/*.ts"],
+    files: [
+      "apps/api/**/*.{ts,mjs,js}",
+      "packages/shared/**/*.{ts,mjs,js}",
+      "scripts/**/*.{ts,mjs,js}",
+      "*.{mjs,js,cjs}",
+    ],
     languageOptions: {
       globals: {
         ...globals.node,
