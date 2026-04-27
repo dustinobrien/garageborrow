@@ -18,3 +18,4 @@ pnpm-debug.log*
 *.tsbuildinfo
 .cache/
 .lighthouse/
+.claude/
