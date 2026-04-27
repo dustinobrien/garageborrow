@@ -15,12 +15,10 @@ PORT="${PORT:-4173}"
 URL="http://localhost:${PORT}/"
 # Spec targets are 90 / 95 / 95 / 90. Performance and Accessibility are the
 # two scores that vary between dev and CI hardware (font rendering / GPU /
-# CPU contention shift contrast & paint timings ~5 points run-to-run). The
-# Performance gate sits 10 below target to absorb the GH-runner-level shift
-# observed once the bundle grew past ~900 KB (consistently lands at 84 in CI
-# vs 90+ locally); A11y stays 5 below target. BP and SEO are deterministic
-# for a static SPA build and stay at spec. Override via env for strict audits.
-PERF_MIN="${PERF_MIN:-80}"
+# CPU contention shift contrast & paint timings ~5 points run-to-run), so
+# their gates are set 5 below target. BP and SEO are deterministic for a
+# static SPA build and stay at spec. Override via env for strict audits.
+PERF_MIN="${PERF_MIN:-85}"
 A11Y_MIN="${A11Y_MIN:-90}"
 BP_MIN="${BP_MIN:-95}"
 SEO_MIN="${SEO_MIN:-90}"
