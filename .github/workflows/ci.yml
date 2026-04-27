@@ -54,9 +54,12 @@ jobs:
         run: ./scripts/lighthouse.sh
 
       - name: Upload Lighthouse report
+        # upload-artifact@v4 skips dotfile directories by default; the
+        # report lives in .lighthouse/, so include-hidden-files is required.
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-report
           path: .lighthouse/
+          include-hidden-files: true
           retention-days: 7
