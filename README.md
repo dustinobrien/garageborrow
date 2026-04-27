@@ -154,4 +154,4 @@ https://github.com/dustinobrien/garageborrow/security/advisories/new.
 
 ## License
 
-[MIT](./LICENSE) — Copyright 2026 Dustin O'Brien.
+[MIT](./LICENSE) — Copyright 2026 Dustin OBrien.
