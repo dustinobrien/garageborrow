@@ -54,8 +54,10 @@ jobs:
               - Insecure crypto / weak randomness
               - Dependency-introduced vulnerabilities
 
-            After posting the comment, write a structured summary to
-            `findings.json` at the repository root using exactly this schema:
+            After posting the comment, use the Write tool to write a
+            structured summary to the path `findings.json` (relative to
+            the current working directory, which is the repository root)
+            using exactly this schema:
 
               {
                 "findings": [
@@ -74,7 +76,7 @@ jobs:
             JSON file is the source of truth for the gate.
 
           claude_args: |
-            --allowedTools "Write(findings.json),mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(git diff:*),Bash(git log:*),Bash(rg:*),Bash(grep:*)"
+            --allowedTools "Write(**/findings.json),mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(git diff:*),Bash(git log:*),Bash(rg:*),Bash(grep:*)"
 
       - name: Gate on high-severity findings
         if: always()
