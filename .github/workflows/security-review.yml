@@ -75,8 +75,19 @@ jobs:
             this file to gate the merge — your PR comment is for humans, the
             JSON file is the source of truth for the gate.
 
+          # Write is unscoped because path-glob filters (Write(findings.json),
+          # Write(**/findings.json)) caused permission denials in practice. The
+          # argument that scoping defends against prompt-injection gate-bypass
+          # is incorrect: Claude can write whatever JSON content it's tricked
+          # into writing regardless of which paths it's allowed to write to —
+          # scoping doesn't prevent that attack. And the runner's checkout is
+          # ephemeral — files Claude writes here don't affect any other step
+          # because the security analysis is based on `gh pr diff` (a frozen
+          # snapshot), not the working tree. Defense against gate-bypass via
+          # injection has to come from elsewhere (e.g., schema validation,
+          # cross-checking findings against the diff), not from Write scope.
           claude_args: |
-            --allowedTools "Write(**/findings.json),mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(git diff:*),Bash(git log:*),Bash(rg:*),Bash(grep:*)"
+            --allowedTools "Write,mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(git diff:*),Bash(git log:*),Bash(rg:*),Bash(grep:*)"
 
       - name: Gate on high-severity findings
         if: always()

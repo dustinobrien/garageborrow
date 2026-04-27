@@ -30,6 +30,11 @@ When a prompt asks you to commit, push, and open a PR:
   body under a "Security review notes" section and continue
 - Do NOT skip /security-review even if the user prompt doesn't explicitly
   mention it — it's a standing requirement for all PR-creating workflows
+- When continuing work on an existing feature branch (rather than
+  creating a new one from main), first run
+  `git fetch origin && git rebase origin/main` and resolve any
+  conflicts before adding new commits. Stale branches accumulate diff
+  noise from main's merged changes.
 
 ### Required URL field handling
 
