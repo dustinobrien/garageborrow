@@ -40,6 +40,14 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Install Chrome for Lighthouse
+        # ubuntu-24.04 runners don't preinstall Chrome. Pinning here so the
+        # Lighthouse step has a deterministic browser instead of relying on
+        # whatever ships in the runner image.
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
       - name: Lighthouse
         # Targets: 90+ Performance / 95+ Accessibility / 95+ Best Practices / 90+ SEO.
         # Thresholds are configured inside scripts/lighthouse.sh.
